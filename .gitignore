@@ -1,0 +1,8 @@
+# client
+save-the-lynx-client/node_modules
+save-the-lynx-client/.pnp
+save-the-lynx-client.pnp.js
+
+# server
+save-the-lynx-server/venv
+save-the-lynx-server/__pycache__

@@ -1,0 +1,28 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #e4edf1;
+}
+
+ul {
+  display: grid;
+  grid-template-columns: 30px 30px 30px 30px;
+  grid-template-rows: 30px 30px 30px 30px;
+  grid-gap: 5px;
+}
+
+.space-state {
+  background-color: deepskyblue;
+}
+
+.space-state-found {
+  background-color: crimson;
+}
+
+.space-state-seen {
+  background-color: aquamarine;
+}
