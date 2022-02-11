@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, request
 from game import Game
 from enums import State
 
@@ -11,55 +11,34 @@ game_state_codes = {
     State.victory: 2, 
     State.defeat: 3
 }
-# player = Player()
-
-# @app.route("/player")
-# def get_current_player():
-#     """Get current player in game."""
-#     return jsonify(
-#         player=game.current_player
-#     )
-
-@app.route("/first-player", methods=("POST",))
-def set_starting_player():
-    """Set the player to start the game."""
-    first_player = request.get_json()
-    if request.method == "POST":
-        print(first_player)
-        game.current_player = first_player
-        game.players.append({
-            'name': first_player,
-            'id': 1,
-            'current_move': (0,0)
-        })
-        return "Starting player set"
-
-@app.route("/second-player", methods=("GET", "POST"))
-def set_second_player():
-    """Set the second player."""
-    second_player = request.get_json()
-    if request.method == "POST":
-        print(second_player)
-        game.players.append({
-            'name': second_player,
-            'id': 2,
-            'current_move': (0,0)
-        })
-        return "Second player set"
 
 @app.route("/start-game", methods=("GET", "POST"))
 def start_game():
     """Start game."""
-    start_game = request.get_json()
+    new_players = request.get_json()
     if request.method == "POST":
-        if start_game:
+        print(len(new_players))
+        if len(new_players) == 2:
+            game.players.append({
+                'name': new_players[0],
+                'id': 1,
+                'current_move': (0,0)
+            })
+            game.players.append({
+                'name': new_players[1],
+                'id': 2,
+                'current_move': (0,0)
+            })
+            game.current_player = 1
             game.start()
-            print(game.board)
-        return {"board": game.board}
+        return {
+            "board": game.board,
+            "firstPlayer": game.players[(game.current_player)-1]
+        }
 
 @app.route("/move", methods=("GET", "POST"))
-def test_move():
-    """Test move."""
+def new_game_move():
+    """Game move."""
     curr_move = request.get_json()
     if request.method == "POST":
         if curr_move:
@@ -67,5 +46,6 @@ def test_move():
         return {
             "board": game.board,
             "state": game_state_codes[game.state],
-            "error": game.game_errors
+            "error": game.game_errors,
+            "next": game.players[(game.current_player)-1]
         }

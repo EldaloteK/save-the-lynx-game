@@ -46,23 +46,22 @@ class Game():
         return surrounding_coords
 
     def start(self):
-        self.state = State.started
-
-        height, width = (4,4)
+        """Start game"""
+        height, width = (10,10)
         pieces = [4,3,2,1]
+        self.state = State.started
         self.board = [[random.choice(pieces) for i in range(width)] for j in range(height)]
         self.board_length = len(self.board[0])
         self.all_coordinates = {(i, c):self.board[i][c] for i in range(len(self.board)) for c in range(self.board_length)}
         self.lynx_location = (random.choice(range(1,height)), random.choice(range(1,width)))
-        print(self.lynx_location)
         self.print_board()
+        self.current_player = 1
     
     def game_move(self, move_y, move_x ):
+        """Game move"""
         try:
             if ((move_x, move_y) == self.lynx_location):
                 self.game_errors = ""
-                print('You won!')
-                print('Animal Location: ', self.lynx_location)
                 self.board[move_x][move_y] = -1
                 self.state = State.victory
 
@@ -73,12 +72,16 @@ class Game():
 
                 for (n1,n2) in neighbors:
                     if (n1,n2) == self.lynx_location:
-                        print('You won!!')
-                        print('Animal Location: ', self.lynx_location)
                         self.board[n1][n2] = -1
                         self.state = State.victory
                     else:
                         self.board[n1][n2] = 0
+            
+            if self.state == State.started:
+                if self.current_player == 1:
+                    self.current_player = 2
+                else:
+                    self.current_player = 1
 
                 self.print_board()
             else:

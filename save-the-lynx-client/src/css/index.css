@@ -10,8 +10,8 @@ body {
 
 ul {
   display: grid;
-  grid-template-columns: 30px 30px 30px 30px;
-  grid-template-rows: 30px 30px 30px 30px;
+  grid-template-columns: repeat(10, 30px);
+  grid-template-rows: repeat(10, 30px);
   grid-gap: 5px;
 }
 
