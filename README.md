@@ -10,6 +10,6 @@ include the algorithm in this project.
 
 ## _A project to delve into:_
 
--React and Flask frameworks.
--Utilization of the flood-fill algorithm.
--Migrating a project from Javascript to Typescript.
+- React and Flask frameworks.
+- Utilization of the flood-fill algorithm.
+- Migrating a project from Javascript to Typescript.
