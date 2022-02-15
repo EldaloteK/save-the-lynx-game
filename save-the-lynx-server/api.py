@@ -17,17 +17,15 @@ def start_game():
     """Start game."""
     new_players = request.get_json()
     if request.method == "POST":
-        print(len(new_players))
+        game.players = []
         if len(new_players) == 2:
             game.players.append({
                 'name': new_players[0],
-                'id': 1,
-                'current_move': (0,0)
+                'id': 1
             })
             game.players.append({
                 'name': new_players[1],
-                'id': 2,
-                'current_move': (0,0)
+                'id': 2
             })
             game.current_player = 1
             game.start()

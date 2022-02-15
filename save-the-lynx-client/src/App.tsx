@@ -1,23 +1,24 @@
 import Header from './components/header';
 import BoardSpace from './components/board-space';
 import classNames from 'classnames';
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { IPlayer } from './interfaces';
+
 
 function App() {
   const [playerOne, setPlayerOne] = useState("");
   const [playerTwo, setPlayerTwo] = useState("");
-  // 1: first player to start, 2: second player
-  const [currentPlayer, setCurrentPlayer] = useState(1);
+
+  const [currentPlayer, setCurrentPlayer] = useState<IPlayer>({
+    name: '',
+    id: 0
+  });
   const [board, setBoard] = useState([]);
+
   // 0: setup, 1: game-play, 2: victory, 3: defeat
   const [gameState, setGameState] = useState(0);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-  };
-
-  const testMove = ((move) => {
-    console.log(move);
+  const gameMove = ((move: number[]) => {
     fetch('/move', {
       method: "POST",
       headers: {
@@ -36,13 +37,7 @@ function App() {
     });
   });
 
-  const processCoordinateClick = (chosenSpace) => {
-    testMove(chosenSpace);
-  }
-
   const startGame = () => {
-    console.log(playerOne);
-    console.log(playerTwo);
     fetch('/start-game', {
       method: "POST",
       headers: {
@@ -53,9 +48,16 @@ function App() {
     .then(data => {
       setBoard(data.board);
       setGameState(1);
-      console.log(data.firstPlayer);
       setCurrentPlayer(data.firstPlayer);
     })
+  }
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+  };
+
+  const processCoordinateClick = (chosenSpace: number[]) => {
+    gameMove(chosenSpace);
   }
 
   return (
@@ -86,8 +88,8 @@ function App() {
       </button>
       <p>Game state: {gameState}.</p>
       <ul>
-        {board.map((row, index) =>
-          row.map((column, colIndex) =>
+        {board.map((row: number[], index: number) =>
+          row.map((column: number, colIndex: number) =>
             <BoardSpace
               key={[index, colIndex]}
               className={classNames(
