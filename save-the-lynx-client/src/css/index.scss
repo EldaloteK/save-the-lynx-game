@@ -5,7 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #e4edf1;
+  background-color: #ccd0d5;
+  // background-color: #e4edf1;
 }
 
 ul {
@@ -15,14 +16,86 @@ ul {
   grid-gap: 5px;
 }
 
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: auto;
+  font-style: italic;
+  padding-bottom: 50px;
+  color: #241f38;
+  .AppHeader {
+    margin-bottom: 0px;
+    .HeaderContainer {
+      display: flex;
+      align-items: center;
+      .BranchUpper {
+        padding-bottom: 30px;
+      }
+      .BranchLower {
+        padding-top: 35px;
+      }
+    }
+  }
+  .PlayerFormContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-direction: column;
+    .PlayerForm {
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 3px 10px rgb(0 0 0 / 20%);
+      padding: 25px;
+      border-radius: 8px;
+      label {
+        margin-right: 10px;
+      }
+      .PlayerFormInputButton {
+        display: flex;
+        align-items: center;
+        input {
+          height: 20px;
+          width: 200px;
+        }
+        button {
+          border: 0px;
+          background: none;
+        }
+      }
+    }
+  }
+  .StartGameButton {
+    font-size: 30px;
+    font-family: auto;
+    font-style: italic;
+    border: none;
+    background: aliceblue;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 20%);
+    border-radius: 4px;
+  }
+  .GamePlay {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .BoardContainer {
+      .BoardUl {
+        margin: 0px;
+        padding: 0px;
+      }
+    }
+  }
+}
+
 .space-state {
-  background-color: deepskyblue;
+  background-color: #850A0A;
 }
 
 .space-state-found {
-  background-color: crimson;
+  background-color: #ddf6ff;
 }
 
 .space-state-seen {
-  background-color: aquamarine;
+  background-color: #ddf6ff;
 }
