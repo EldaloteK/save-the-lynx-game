@@ -228,14 +228,14 @@ function BoardSpace(props: any) {
           <g
             id="Page-1"
             stroke="none"
-            stroke-width="1"
+            strokeWidth="1"
             fill="none"
-            fill-rule="evenodd"
+            fillRule="evenodd"
           >
             <g
               id="pine-tree-1"
               transform="translate(0.967000, 0.164000)"
-              fill-rule="nonzero"
+              fillRule="nonzero"
             >
               <g
                 id="tree-upper"

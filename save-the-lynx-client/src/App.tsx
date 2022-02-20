@@ -1,10 +1,10 @@
 import Header from "./components/header";
 import BoardSpace from "./components/board-space";
+import PlayerInputPaw from "./components/player-input-paw";
+import LynxAnimal from "./components/lynx-animal";
 import classNames from "classnames";
 import React, { useState } from "react";
 import { IPlayer } from "./interfaces";
-import PlayerInputPaw from "./components/player-input-paw";
-import LynxAnimal from "./components/lynx-animal";
 
 function App() {
   const [playerOne, setPlayerOne] = useState("");
@@ -14,6 +14,7 @@ function App() {
     name: "",
     id: 0,
   });
+
   const [board, setBoard] = useState([]);
 
   const [gameState, setGameState] = useState(0);
@@ -138,13 +139,15 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className="AppHeader">
+      <div className="AppHeader">
         <Header />
-      </h1>
-      {showInputPlayers()}
-      <LynxAnimal />
-      {showStartGame()}
-      {showGamePlay()}
+      </div>
+      <div className="AppBody">
+        {showInputPlayers()}
+        <LynxAnimal />
+        {showStartGame()}
+        {showGamePlay()}
+      </div>
     </div>
   );
 }
