@@ -21,7 +21,7 @@ class Game():
         ]
     
     def print_board(self):
-        """Print the board"""
+        """Print the board - for dev use only."""
         print("")
         k = [*range(0, len(self.board), 1)]
         print('  ', k)
