@@ -1,6 +1,7 @@
 import * as React from "react";
+import { IBoardSpaceProp } from "../interfaces";
 
-function BoardSpace(props: any) {
+function BoardSpace(props: IBoardSpaceProp) {
   const spaceContent = () => {
     if (props.searched == -1) {
       return (

@@ -110,7 +110,7 @@ function App() {
               {board.map((row: number[], index: number) =>
                 row.map((column: number, colIndex: number) => (
                   <BoardSpace
-                    key={[index, colIndex]}
+                    key={[index, colIndex].toString()}
                     className={classNames(
                       "space-state",
                       board[index][colIndex] === 0 && "space-state-seen",
