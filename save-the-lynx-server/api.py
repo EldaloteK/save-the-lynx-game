@@ -7,6 +7,7 @@ app = Flask(__name__)
 game = Game()
 
 game_state_codes = {
+    State.setup: 0,
     State.started: 1, 
     State.victory: 2, 
     State.defeat: 3
@@ -47,3 +48,16 @@ def new_game_move():
             "error": game.game_errors,
             "next": game.players[(game.current_player)-1]
         }
+
+@app.route("/start-game-over", methods=("GET", "POST"))
+def start_game_over():
+    """Refresh to a new game."""
+    req = request.get_json()
+    if request.method == "POST":
+        if req:
+            game.refresh_game()
+
+    return {
+        "state": game_state_codes[game.state]
+    }
+

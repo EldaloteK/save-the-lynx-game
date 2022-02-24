@@ -3,6 +3,7 @@ import * as React from "react";
 const LynxAnimal = () => {
   return (
     <svg
+      className="LynxAnimalSvg"
       width="146px"
       height="210px"
       viewBox="0 0 206 270"

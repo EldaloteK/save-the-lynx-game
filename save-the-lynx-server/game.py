@@ -5,7 +5,7 @@ class Game():
     def __init__(self):
         self.players = []
         self.current_player = "Player ?"
-        self.state = State.started
+        self.state = State.setup
         self.board = []
         self.all_coordinates = {}
         self.lynx_location = 0
@@ -89,3 +89,14 @@ class Game():
 
         except ValueError:
             self.game_errors = "Not a valid move"
+
+    def refresh_game(self):
+        """Refresh to a new game"""
+        self.players = []
+        self.current_player = "Player ?"
+        self.state = State.setup
+        self.board = []
+        self.all_coordinates = {}
+        self.lynx_location = 0
+        self.board_length = 0
+        self.game_errors = ""

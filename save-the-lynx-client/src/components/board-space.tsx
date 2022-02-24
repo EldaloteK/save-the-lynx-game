@@ -1,5 +1,6 @@
 import * as React from "react";
 import { IBoardSpaceProp } from "../interfaces";
+import classNames from "classnames";
 
 function BoardSpace(props: IBoardSpaceProp) {
   const spaceContent = () => {
@@ -308,13 +309,12 @@ function BoardSpace(props: IBoardSpaceProp) {
 
   return (
     <svg
-      className={`space-state ${
-        props.searched <= 0
-          ? props.searched === 0
-            ? "space-state-seen"
-            : "space-state-found"
-          : ""
-      }`}
+    className={classNames(
+      "space-state",
+      {"space-state-seen": props.searched === 0},
+      {"space-state-found": props.searched === -1},
+      {"victory": props.state === 2}
+    )}
       onClick={() => {
         props.coordinateClicked(props.coordinate);
       }}
@@ -334,17 +334,6 @@ function BoardSpace(props: IBoardSpaceProp) {
       >
         <rect id="space" x="0" y="0" width="100" height="100"></rect>
         {spaceContent()}
-        {/* <text
-          id="space-number"
-          fontFamily="Luminari-Regular, Luminari"
-          fontSize="30"
-          fontWeight="normal"
-          fill="#002268"
-        >
-          <tspan x="40" y="60">
-            {/* {props.searched !== -1 ? props.searched : ""} */}
-        {/* </tspan>
-        </text> */}
       </g>
     </svg>
   );

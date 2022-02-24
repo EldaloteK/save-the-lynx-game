@@ -5,7 +5,8 @@ export interface IPlayer {
 
 export interface IBoardSpaceProp {
     searched: number;
+    state: number;
     coordinate: number[];
     coordinateClicked: (chosenSpace: number[]) => void;
-    className: string;
+    // className: string;
 }

@@ -2,7 +2,7 @@ import Header from "./components/header";
 import BoardSpace from "./components/board-space";
 import PlayerInputPaw from "./components/player-input-paw";
 import LynxAnimal from "./components/lynx-animal";
-import classNames from "classnames";
+// import classNames from "classnames";
 import React, { useState } from "react";
 import { IPlayer } from "./interfaces";
 
@@ -55,6 +55,22 @@ function App() {
       });
   };
 
+  const startGameOver = () => {
+    fetch("/start-game-over", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(1),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.state == 0) {
+          setGameState(0);
+        }
+      });
+  };
+
   const showInputPlayers = () => {
     if (gameState < 1) {
       return (
@@ -93,7 +109,7 @@ function App() {
   const showStartGame = () => {
     if (gameState < 1) {
       return (
-        <button className="StartGameButton" onClick={() => startGame()}>
+        <button className="GameButton" onClick={() => startGame()}>
           Start game
         </button>
       );
@@ -104,19 +120,28 @@ function App() {
     if (gameState >= 1) {
       return (
         <div className="GamePlay">
-          <h2>The current player is {currentPlayer.name}.</h2>
+          <div className="GamePlayStatusText">
+            {gameState === 1 ? (
+              <span>The current player is {currentPlayer.name}.</span>
+            ) : (
+              <span>The winner is {currentPlayer.name}!</span>
+            )}
+          </div>
+          <div className="GameButtonContainer">
+            {gameState === 2 && (
+              <button className="GameButton" onClick={() => startGameOver()}>
+                Start game over
+              </button>
+            )}
+          </div>
           <div className="BoardContainer">
             <ul className="BoardUl">
               {board.map((row: number[], index: number) =>
                 row.map((column: number, colIndex: number) => (
                   <BoardSpace
                     key={[index, colIndex].toString()}
-                    className={classNames(
-                      "space-state",
-                      board[index][colIndex] === 0 && "space-state-seen",
-                      board[index][colIndex] === -1 && "space-state-found"
-                    )}
                     searched={board[index][colIndex]}
+                    state={gameState}
                     coordinateClicked={processCoordinateClick}
                     coordinate={[index, colIndex]}
                   />
